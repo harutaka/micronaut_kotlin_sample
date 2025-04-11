@@ -33,6 +33,15 @@ class HelloWorld(@Client("https://jsonplaceholder.typicode.com") private val cli
 
     @Post
     fun createGreeting(@Body body: RequestBody): String {
-        return "Hello ${body.name}"
+        val numbers = listOf(1, 2, 3, 4, 5)
+
+        var max = numbers[0]
+        for (num in numbers) {
+            if (num > max) {
+                max = num
+            }
+        }
+        
+        return "Hello ${body.name} ${max.toString()}"
     }
 }
