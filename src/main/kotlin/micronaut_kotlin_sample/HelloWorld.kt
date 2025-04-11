@@ -17,7 +17,7 @@ import jakarta.inject.Inject
 class HelloWorld {
     @Inject
     @field:Client("https://jsonplaceholder.typicode.com")
-    lateinit var httpClient: HttpClient
+    lateinit var client: HttpClient
     
     @Serdeable
     data class RequestBody(val name: String)
@@ -29,16 +29,14 @@ class HelloWorld {
     data class CustomResponse(val id: Int, val title: String)
 
     @Get
-    fun get(): CustomResponse {
-        val response = httpClient.toBlocking().retrieve(
-            HttpRequest.GET<Any>("/todos/1"),
-            TodoResponse::class.java
-        )
+    fun getTodo(): CustomResponse {
+        val request = HttpRequest.GET<Any>("/todos/1")
+        val response = client.toBlocking().retrieve(request, TodoResponse::class.java)
         return CustomResponse(response.id, response.title)
     }
 
     @Post
-    fun post(@Body body: RequestBody): String {
+    fun createGreeting(@Body body: RequestBody): String {
         return "Hello ${body.name}"
     }
 }
