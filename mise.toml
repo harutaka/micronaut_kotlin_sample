@@ -1,2 +1,5 @@
 [tasks.start]
 run = "./gradlew run"
+
+[tasks.test]
+run = "./gradlew test"
