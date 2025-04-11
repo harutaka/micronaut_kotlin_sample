@@ -14,11 +14,7 @@ import jakarta.inject.Inject
 
 @Controller("/hello")
 @ExecuteOn(TaskExecutors.BLOCKING)
-class HelloWorld {
-    @Inject
-    @field:Client("https://jsonplaceholder.typicode.com")
-    lateinit var client: HttpClient
-    
+class HelloWorld(@Client("https://jsonplaceholder.typicode.com") private val client: HttpClient) {
     @Serdeable
     data class RequestBody(val name: String)
     
