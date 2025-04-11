@@ -23,7 +23,8 @@ class HelloWorldTest {
     fun testCreateGreeting(spec: RequestSpecification) {
         spec
             .given()
-                .param("name", "John")
+                .header("Content-Type", "application/json")
+                .body("{\"name\": \"John\"}")
             .`when`()
                 .post("/hello")
             .then()
